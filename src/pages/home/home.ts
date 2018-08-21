@@ -75,7 +75,7 @@ export class HomePage implements OnInit{
           console.log(erro);
         });
   }
-  
+
 
   cadastrar(){
     this.navCtrl.push(Formulario);
@@ -83,14 +83,14 @@ export class HomePage implements OnInit{
 
   criarMensagem(status){
     return this._alert = this._alertCtrl.create({
-      title: (status == 200) ? this._configuracaoMensagem.getSucessoOperacaoTitulo() : this._configuracaoMensagem.getFalhaOperacaoMensagem() ,
-      subTitle: (status == 200) ? this._configuracaoMensagem.getSucessoOperacaoTitulo() : this._configuracaoMensagem.getFalhaOperacaoMensagem(),
+      title: (status == 200) ? this._configuracaoMensagem.getSucessoOperacaoTitulo() : this._configuracaoMensagem.getFalhaOperacaoTitulo() ,
+      subTitle: (status == 200) ? this._configuracaoMensagem.getSucessoOperacaoMensagem() : this._configuracaoMensagem.getFalhaOperacaoMensagem(),
       buttons: [{
-        text:'Fechar',  
+        text:'Fechar',
         handler:() => {this.navCtrl.setRoot(HomePage)}
       }]
     });
   }
-  
+
 
 }

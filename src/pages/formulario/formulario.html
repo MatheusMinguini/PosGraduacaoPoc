@@ -1,14 +1,13 @@
-<ion-header>
+  <ion-header>
     <ion-navbar>
       <ion-title>
         <p color="detail">Informe os dados</p>
       </ion-title>
     </ion-navbar>
   </ion-header>
-  
+
   <ion-content>
       <form>
-  
         <div *ngIf="!nomeValido">
           <ion-item>
             <ion-label id="nome" color="twitterDarkBlue" floating>Nome</ion-label>
@@ -19,7 +18,7 @@
             <ion-label id="sobrenome" color="twitterDarkBlue" floating>Sobrenome</ion-label>
             <ion-input name="sobrenome" [(ngModel)]="cliente.sobrenome" maxlength="20" clearInput></ion-input>
           </ion-item>
-  
+
           <ion-row>
             <ion-col text-center>
               <button [color]="myColor" [round]="true" (click)="verificarDuplicidadeNome()" ion-button small>
@@ -30,11 +29,11 @@
   
           <ion-row>
             <ion-col text-center>
-              <h6 color="twitterDarkBlue">Lembre-se: N„o pode utilizar nomes j· cadastrados!</h6>
+              <h6 color="twitterDarkBlue">Lembre-se: N√£o pode utilizar nomes j√° cadastrados!</h6>
             </ion-col>
           </ion-row>
         </div>
-  
+
         <div *ngIf="nomeValido">
           <ion-item>
             <ion-label id="celular" color="twitterDarkBlue" floating>Celular</ion-label>
@@ -50,12 +49,12 @@
             <ion-label id="data_nascimento" color="twitterDarkBlue" floating>Data de nascimento</ion-label>
             <ion-datetime  name="data_nascimento" [(ngModel)]="cliente.data_nascimento" displayFormat="DD/MM/YYYY"></ion-datetime>
           </ion-item><br>
-  
+
           <ion-card>
             <ion-card-header id="sexo" color="twitterDarkBlue">
               <b>Sexo</b>
             </ion-card-header>
-  
+
             <ion-list radio-group [(ngModel)]="cliente.sexo" [ngModelOptions]="{standalone: true}">
               <ion-item>
                 <ion-label color="twitterDarkBlue">Masculino</ion-label>
@@ -67,7 +66,7 @@
               </ion-item>
             </ion-list>
           </ion-card><br>
-  
+
           <button [color]="myColor" [round]="isRound" (click)="salvar()" ion-button block >
               Finalizar
           </button>

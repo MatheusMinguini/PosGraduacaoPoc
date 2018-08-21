@@ -21,12 +21,12 @@ export class Formulario implements OnInit{
   isRound: boolean;
 
   public nomeValido: boolean  = false;
-  
+
   constructor(public parametro : NavParams,
       public _navController : NavController,
       public _alert : AlertController,
       private _loadingCtrl: LoadingController,
-      public _http: Http, 
+      public _http: Http,
       public _configuracaoMensagem: ConfiguracaoMensagem,
       public _configuracaoService: ConfiguracaoService){
 
@@ -39,7 +39,7 @@ export class Formulario implements OnInit{
 
   salvar(){
     if(this.cliente.verificarCamposObrigatorios(this.cliente)){
-      
+
     }else{
         this._configuracaoMensagem.mostrarMensagemCamposObrigatorios(this);
 
@@ -56,12 +56,6 @@ export class Formulario implements OnInit{
   getCamposVazios(){
     let arr : any = [];
 
-    if(!this.cliente.nome)
-        arr.push(document.querySelector('#nome'));
-
-    if(!this.cliente.sobrenome)
-        arr.push(document.querySelector('#sobrenome'));
-
     if(!this.cliente.celular)
         arr.push(document.querySelector('#celular'));
 
@@ -74,15 +68,11 @@ export class Formulario implements OnInit{
     if(!this.cliente.data_nascimento)
         arr.push(document.querySelector('#data_nascimento'));
 
-
      return arr;
-
   }
 
   limparCorCampos(){
-    debugger;
-    document.querySelector('#nome').setAttribute("style", "color: #0084b4");
-    document.querySelector('#sobrenome').setAttribute("style", "color: #0084b4");
+
     document.querySelector('#celular').setAttribute("style", "color: #0084b4");
     document.querySelector('#email').setAttribute("style", "color: #0084b4");
     document.querySelector('#sexo').setAttribute("style", "color:#0084b4");
@@ -117,7 +107,7 @@ export class Formulario implements OnInit{
               {
                 title : 'Nome Existente',
                 buttons : [{ text : "Tudo bem"}],
-                subTitle : 'Verificamos e, j· existe um produto com esse nome'
+                subTitle : 'Verificamos e, j√° existe um produto com esse nome'
               }).present();
             }
 

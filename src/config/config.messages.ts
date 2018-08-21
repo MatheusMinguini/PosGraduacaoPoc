@@ -9,19 +9,19 @@ export class ConfiguracaoMensagem {
 
     public _falhaOperacaoTitulo: string;
     public _falhaOperacaoMensagem : string;
-  
+
     constructor(){
       this._mensagemLoading = 'Buscando clientes recentementes cadastrados';
-      this._falhaConexaoTitulo = 'Falha na conexão';
-      this._falhaConexaoMensagem = 'Não foi possível obter os dados, verifique a sua internet';
+      this._falhaConexaoTitulo = 'Falha na conexÃ£o';
+      this._falhaConexaoMensagem = 'NÃ£o foi possÃ­vel obter os dados, verifique a sua internet';
 
       this._sucessoOperacaoTitulo = 'Sucesso';
-      this._sucessoOperacaoMensagem = 'Operação realizada com sucesso';
+      this._sucessoOperacaoMensagem = 'OperaÃ§Ã£o realizada com sucesso';
       this._falhaOperacaoTitulo = 'Ocorreu um problema no servidor, estamos trabalhando pra resolver';
       this._falhaOperacaoMensagem = 'Ocorreu um problema no servidor, estamos trabalhando pra resolver';
     }
 
-    
+
     getMensagemLoading() : string{
         return this._mensagemLoading;
     }
@@ -46,11 +46,11 @@ export class ConfiguracaoMensagem {
 
     confirmarOperacao(objeto, cliente) {
         let alert = objeto._alertCtrl.create({
-          title: 'Confirmação',
-          message: 'Você deseja realmente realizar essa operação?',
+          title: 'ConfirmaÃ§Ã£o',
+          message: 'VocÃª deseja realmente realizar essa operaÃ§Ã£o?',
           buttons: [
             {
-              text: 'Não',
+              text: 'NÃ£o',
               role: 'cancel'
             },
             {
@@ -65,11 +65,10 @@ export class ConfiguracaoMensagem {
     }
 
     mostrarMensagemCamposObrigatorios(objeto) {
-        objeto._alertCtrl.create({
-            title : 'Campos obrigatórios',
+        objeto._alert.create({
+            title : 'Campos obrigatÃ³rios',
             subTitle : 'Por favor, preencha todos os campos em vermelho',
             buttons : [{ text: 'Entendi'}]
         }).present();
     }
   }
-  
