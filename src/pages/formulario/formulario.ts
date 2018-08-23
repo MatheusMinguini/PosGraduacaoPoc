@@ -19,12 +19,13 @@ export class Formulario implements OnInit{
 
   myColor: string;
   isRound: boolean;
-
+  loader : any;
+  private _alert : Alert;
   public nomeValido: boolean  = false;
 
   constructor(public parametro : NavParams,
       public _navController : NavController,
-      public _alert : AlertController,
+      public _alertCtrl : AlertController,
       private _loadingCtrl: LoadingController,
       public _http: Http,
       public _configuracaoMensagem: ConfiguracaoMensagem,
@@ -35,11 +36,28 @@ export class Formulario implements OnInit{
   ngOnInit(){
     this.myColor = 'search-buttom';
     this.isRound = false;
+
+    this.loader = this._loadingCtrl.create({
+        content : "Salvando o cliente, aguarde"
+    });
   }
 
   salvar(){
     if(this.cliente.verificarCamposObrigatorios(this.cliente)){
-
+            this.loader.present();
+            this._http.post(this._configuracaoService.getAdressAPI() + '/salvar', this.cliente)
+              .toPromise().then(elemento => {
+                let mensagem = this.criarMensagem(200);
+                mensagem.present();
+                this.loader.dismiss();
+            }).catch (erro => {
+              this.loader.dismiss();
+              this._alertCtrl.create({
+                  title : this._configuracaoMensagem.getFalhaOperacaoTitulo(),
+                  buttons : [{ text : "Estou ciente", handler:() => {this._navController.setRoot(HomePage)}}],
+                  subTitle : this._configuracaoMensagem.getFalhaOperacaoMensagem()
+              }).present();
+            });
     }else{
         this._configuracaoMensagem.mostrarMensagemCamposObrigatorios(this);
 
@@ -72,17 +90,27 @@ export class Formulario implements OnInit{
   }
 
   limparCorCampos(){
-
     document.querySelector('#celular').setAttribute("style", "color: #0084b4");
     document.querySelector('#email').setAttribute("style", "color: #0084b4");
     document.querySelector('#sexo').setAttribute("style", "color:#0084b4");
     document.querySelector('#data_nascimento').setAttribute("style", "color:#0084b4");
   }
 
+  criarMensagem(status){
+    return this._alert = this._alertCtrl.create({
+      title: (status == 200) ? this._configuracaoMensagem.getSucessoOperacaoTitulo() : this._configuracaoMensagem.getFalhaOperacaoTitulo() ,
+      subTitle: (status == 200) ? this._configuracaoMensagem.getSucessoOperacaoMensagem() : this._configuracaoMensagem.getFalhaOperacaoMensagem(),
+      buttons: [{
+        text:'Fechar',
+        handler:() => {this._navController.setRoot(HomePage)}
+      }]
+    });
+  }
+
   verificarDuplicidadeNome(){
 
     if(!this.cliente.nome && !this.cliente.sobrenome) {
-      this._alert.create({
+      this._alertCtrl.create({
         title : 'Dados vazios',
         buttons : [{ text : "Entendi"}],
         subTitle : 'Por favor, informe o nome'
@@ -103,17 +131,17 @@ export class Formulario implements OnInit{
             if (typeof elemento == 'undefined' || elemento.length == 0) {
               this.nomeValido = true;
             }else{
-              this._alert.create(
+              this._alertCtrl.create(
               {
                 title : 'Nome Existente',
                 buttons : [{ text : "Tudo bem"}],
-                subTitle : 'Verificamos e, já existe um produto com esse nome'
+                subTitle : 'Verificamos e, já existe um cliente com esse nome'
               }).present();
             }
 
           }).catch (erro => {
             loader.dismiss();
-            this._alert.create(
+            this._alertCtrl.create(
               {
                 title : 'Erro',
                 buttons : [{ text : "Tudo bem", handler : () => {this._navController.setRoot(HomePage)} }],

@@ -63,7 +63,6 @@ export class HomePage implements OnInit{
   }
 
   remover(cliente){
-    debugger;
     this._http.post(this._configuracaoService.getAdressAPI() + '/remover', cliente)
       .map(resp => resp.json())
         .toPromise().then(elemento => {

@@ -19,9 +19,7 @@ module.exports =  function(){
 
     const data_atual = new Date();
     let data_banco = data_atual.toISOString().substring(0, 10);
-
-    let sql = `INSERT INTO cliente (nome, sobrenome, celular, email, data_nascimento)`;
-
+    let sql = `INSERT INTO cliente (nome, sobrenome, celular, email, data_nascimento, sexo, data_cadastro`;
 
     if(objeto.img != undefined) sql = sql + `, img`;
 
@@ -29,7 +27,7 @@ module.exports =  function(){
 
     sql = sql + ` VALUES
       ('${objeto.nome}', '${objeto.sobrenome}', '${objeto.celular}',
-      '${objeto.email}', ${data_nascimento}`;
+      '${objeto.email}', '${objeto.data_nascimento}', '${objeto.sexo}', '${data_banco}'`;
 
     if(objeto.img != undefined) sql = sql + `, '${caminho}'`;
 
